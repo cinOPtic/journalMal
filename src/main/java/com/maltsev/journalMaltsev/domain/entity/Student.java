@@ -11,6 +11,12 @@ public class Student {
     private Long id;
     @Column(name = "name", length = 100)
     private String name;
+    @Column(name = "namegroup", length = 100)
+    private String namegroup;
+    public Student(String name,String namegroup) {
+        this.name = name;
+        this.namegroup = namegroup;
+    }
     public Student() {
         this.name = "безымянный";
     }
@@ -23,7 +29,7 @@ public class Student {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
+    public String getNamegroup() { return namegroup; }
+    public void setNamegroup(String namegroup) { this.namegroup = namegroup; }
 }

@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface StudentRepo extends CrudRepository<Student, Long> {
+    Iterable<Student> findByNamegroup(String namegroup);
 }
