@@ -3,6 +3,7 @@ package com.maltsev.journalMaltsev.controllers;
 import com.maltsev.journalMaltsev.domain.entity.Student;
 import com.maltsev.journalMaltsev.domain.repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
     @Autowired
     private StudentRepo studentRepo;
-    @GetMapping
+    @GetMapping("/")
     public String main(Model model){
         Iterable<Student> students= studentRepo.findAll();
         model.addAttribute("students",students);
         return "main";
     }
 
-    @PostMapping
+    @GetMapping("/student")
+    @PreAuthorize("hasAuthority('STUDENT')")
+    public String student(Model model) {
+        Iterable<Student> students = studentRepo.findAll();
+        model.addAttribute("students", students);
+        return "main";
+    }
+
+    @PostMapping("/add")
     public String add(String fio, String groupp, Model model){
         Student student=new Student(fio,groupp);
         studentRepo.save(student);
