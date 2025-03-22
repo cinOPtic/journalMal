@@ -1,4 +1,4 @@
-package com.maltsev.journalMaltsev.domain;
+package com.maltsev.journalMaltsev.domain.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -9,27 +9,70 @@ public class Student {
     @Column(name = "student_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "name", length = 100)
-    private String name;
-    @Column(name = "namegroup", length = 100)
-    private String namegroup;
-    public Student(String name,String namegroup) {
-        this.name = name;
-        this.namegroup = namegroup;
-    }
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "family_id")
+    private Family family;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fistname_id")
+    private Firstname firstname;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "secondname_id")
+    private Secondname secondname;
+
+    @OneToOne
+    @JoinColumn(name = "usr_id")
+    private User studentuser;
+
     public Student() {
-        this.name = "безымянный";
     }
+
+    public Student(Family family, Firstname firstname, Secondname secondname, User studentuser) {
+        this.family = family;
+        this.firstname = firstname;
+        this.secondname = secondname;
+        this.studentuser = studentuser;
+    }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+
+    public Family getFamily() {
+        return family;
     }
-    public void setName(String name) { this.name = name; }
-    public String getNamegroup() { return namegroup; }
-    public void setNamegroup(String namegroup) { this.namegroup = namegroup; }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
+    public Firstname getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(Firstname firstname) {
+        this.firstname = firstname;
+    }
+
+    public Secondname getSecondname() {
+        return secondname;
+    }
+
+    public void setSecondname(Secondname secondname) {
+        this.secondname = secondname;
+    }
+
+    public User getStudentuser() {
+        return studentuser;
+    }
+
+    public void setStudentuser(User studentuser) {
+        this.studentuser = studentuser;
+    }
 }
